@@ -12,7 +12,7 @@ jobs:
 
     - name: Set up Flyway
       run: |
-        # Загрузка и распаковка Flyway
+        # Загрузка и распаковка Flyway trigger
         wget https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/7.11.1/flyway-commandline-7.11.1-linux-x64.tar.gz
         tar -xvzf flyway-commandline-7.11.1-linux-x64.tar.gz
         sudo mv flyway-7.11.1 /usr/local/flyway
