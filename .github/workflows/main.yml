@@ -12,11 +12,9 @@ jobs:
 
     - name: Set up Flyway
       run: |
-        wget https://repo.flywaydb.org/public/key/flyway.asc
-        gpg --dearmor --output /usr/share/keyrings/flyway-archive-keyring.gpg flyway.asc
-        echo "deb [signed-by=/usr/share/keyrings/flyway-archive-keyring.gpg] https://dl.bintray.com/flyway/flyway-deb stable main" | tee -a /etc/apt/sources.list.d/flyway.list
-        apt-get update
-        apt-get install -y flyway
+        # Устанавливаем Flyway с официального репозитория
+        wget -qO- https://dlcdn.apache.org/flyway/flyway-commandline-7.11.1-linux-x64.tar.gz | tar xvz
+        sudo mv flyway-*/flyway /usr/local/bin/
 
     - name: Run Flyway Migrations
       run: |
