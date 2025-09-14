@@ -1,4 +1,3 @@
--- flyway:executeInTransaction=false
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET synchronous_commit = OFF;
@@ -14,8 +13,8 @@ ON CONFLICT DO NOTHING;
 
 TRUNCATE TABLE order_product, orders RESTART IDENTITY;
 
-ALTER TABLE orders        SET UNLOGGED;
 ALTER TABLE order_product SET UNLOGGED;
+ALTER TABLE orders        SET UNLOGGED;
 
 DO $$
 DECLARE
