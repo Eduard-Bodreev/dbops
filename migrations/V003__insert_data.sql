@@ -1,3 +1,8 @@
+-- flyway:executeInTransaction=false
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET synchronous_commit = OFF;
+
 INSERT INTO product (id, name, picture_url, price) VALUES
   (1, 'Сливочная', 'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/6.jpg', 320.00),
   (2, 'Особая', 'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/5.jpg', 179.00),
@@ -5,8 +10,6 @@ INSERT INTO product (id, name, picture_url, price) VALUES
   (4, 'Нюренбергская', 'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/3.jpg', 315.00),
   (5, 'Мюнхенская', 'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/2.jpg', 330.00),
   (6, 'Русская', 'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/1.jpg', 189.00);
-
-
 
 INSERT INTO orders (id, status, date_created)
 SELECT
@@ -21,3 +24,6 @@ SELECT
   i,
   (1 + floor(random() * 6)::int)
 FROM generate_series(1, 10000000) s(i);
+
+SELECT setval(pg_get_serial_sequence('product','id'), COALESCE((SELECT MAX(id) FROM product),1));
+SELECT setval(pg_get_serial_sequence('orders','id'),  COALESCE((SELECT MAX(id) FROM orders),1));
