@@ -1,11 +1,7 @@
 -- flyway:executeInTransaction=false
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET synchronous_commit = OFF;
-
-TRUNCATE TABLE order_product;
-TRUNCATE TABLE orders;
 
 INSERT INTO product (id, name, picture_url, price) VALUES
   (1, 'Сливочная',    'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/6.jpg', 320.00),
@@ -15,6 +11,8 @@ INSERT INTO product (id, name, picture_url, price) VALUES
   (5, 'Мюнхенская',   'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/2.jpg', 330.00),
   (6, 'Русская',      'https://res.cloudinary.com/sugrobov/image/upload/v1623323635/repos/sausages/1.jpg', 189.00)
 ON CONFLICT DO NOTHING;
+
+TRUNCATE TABLE order_product, orders RESTART IDENTITY;
 
 ALTER TABLE orders        SET UNLOGGED;
 ALTER TABLE order_product SET UNLOGGED;
